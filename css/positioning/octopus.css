@@ -3,8 +3,16 @@ html {
 }
 
 #octopus {
+	position: relative;
 	display: block;
 	margin: 0 auto;
 	margin-top: 200px;
 }
 
+#hat {
+	position: absolute;
+	display: block;
+	margin: 41%;
+	margin-top: 115px;	
+	z-index: 1;
+}
