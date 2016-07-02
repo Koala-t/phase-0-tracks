@@ -4,6 +4,17 @@ blockquote {
   margin-left: 0px;
 }
 
+body {
+  max-width: 960px;
+  min-width: 500px;
+}
+
+main {
+  vertical-align: text-top;
+  display: inline-block;
+  width: 78%;
+}
+
 cite {
   display: block;
   margin-top: 10px;
@@ -12,6 +23,12 @@ cite {
 #external-links ul {
   list-style-type: none;
   padding-left: 0px;
+}
+
+#external-links {
+  width: 20%;
+  display: inline-block;
+  vertical-align: text-top;
 }
 
 /* you're welcome to edit the
