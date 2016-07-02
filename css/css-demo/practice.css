@@ -1,0 +1,22 @@
+#contact-info p {
+  font-size: .8em;
+}
+
+.job {
+  background-color: #e9e5dc;
+  border-radius: 15px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.accomplishments li {
+  font-size: .8em;
+}
+
+#work-experience .job h3 {
+	color: blue;
+}
+
+.job ul li {
+	color: green;
+}
