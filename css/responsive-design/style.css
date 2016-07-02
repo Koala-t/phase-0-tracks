@@ -5,13 +5,14 @@ blockquote {
 }
 
 body {
-  width: 960px;
+  max-width: 960px;
+  min-width: 500px;
 }
 
 main {
   vertical-align: text-top;
   display: inline-block;
-  width: 756px;
+  width: 78%;
 }
 
 cite {
@@ -25,7 +26,7 @@ cite {
 }
 
 #external-links {
-  width: 200px;
+  width: 20%;
   display: inline-block;
   vertical-align: text-top;
 }
