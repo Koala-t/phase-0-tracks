@@ -4,6 +4,16 @@ blockquote {
   margin-left: 0px;
 }
 
+body {
+  width: 960px;
+}
+
+main {
+  vertical-align: text-top;
+  display: inline-block;
+  width: 756px;
+}
+
 cite {
   display: block;
   margin-top: 10px;
@@ -12,6 +22,12 @@ cite {
 #external-links ul {
   list-style-type: none;
   padding-left: 0px;
+}
+
+#external-links {
+  width: 200px;
+  display: inline-block;
+  vertical-align: text-top;
 }
 
 /* you're welcome to edit the
