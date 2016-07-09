@@ -7,6 +7,8 @@ blockquote {
 body {
   max-width: 960px;
   min-width: 500px;
+  margin: auto;
+  width: 50%;
 }
 
 main {
@@ -51,5 +53,23 @@ figcaption {
 @media screen and (max-width: 500px) {
   body {
     background-color: hotpink;
+  }
+}
+
+@media (max-width: 500px){
+  h1{
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 500px){
+  main {
+    width: 100%;
+  }
+  #external-links{
+    width: 100%;
+  }
+  #external-links ul{
+    font-size: 40%;
   }
 }
