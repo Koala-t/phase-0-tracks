@@ -23,6 +23,16 @@ def insurance()
 	return gets.chomp
 end
 
+def allergies()
+	input = ""
+	until input == "done"
+		puts "Please list any allergies. Type done when finished"
+		input = gets.chomp
+		if input == "sunshine"
+			return "Probably a vampire"
+		end
+	end
+end
 
 
 def process_employees()
@@ -37,26 +47,33 @@ def process_employees()
 		garlic = food_preference()
 		covered = insurance()
 		check_dob = 2016 - age.to_i
-
+		
 		result = "Results inconclusive"
 
-		if check_dob.to_s == dob && (garlic == "yes" || covered == "yes")
-			result = "Probably not a vampire"
-		end
-
-		if check_dob.to_s != dob && (garlic == "no" || covered == "no")
+		if allergies() == "Probably a vampire"
 			result = "Probably a vampire"
-		end
+		else
 
-		if check_dob.to_s != dob && garlic == "no" && covered == "no"
-			result = "almost certainly a vampire"
-		end
+			if check_dob.to_s == dob && (garlic == "yes" || covered == "yes")
+				result = "Probably not a vampire"
+			end
 
-		if name == "Drake Cula" || name == "Tu Fang" || name == "Allucard"
-			result = "Definitley a vampire"
-		end
+			if check_dob.to_s != dob && (garlic == "no" || covered == "no")
+				result = "Probably a vampire"
+			end
 
-		puts result;
+			if check_dob.to_s != dob && garlic == "no" && covered == "no"
+				result = "almost certainly a vampire"
+			end
+
+			if name == "Drake Cula" || name == "Tu Fang" || name == "Allucard"
+				result = "Definitley a vampire"
+			end
+
+		end
+		puts result
+
+
 
 		num_employees -= 1
 
