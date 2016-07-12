@@ -13,3 +13,12 @@ def ask_dob()
 	return gets.chomp
 end
 
+def food_preference()
+	puts "Our company cafeteria serves garlic bread. Should we order some for you?"
+	return gets.chomp
+end
+
+def insurance()
+	puts "Would you like to enroll in the company’s health insurance?"
+	return gets.chomp
+end
