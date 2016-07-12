@@ -30,7 +30,7 @@ garlic = food_preference()
 covered = insurance()
 check_dob = 2016 - age.to_i
 
-
+result = "Results inconclusive"
 
 if check_dob.to_s == dob && (garlic == "yes" || covered == "yes")
 	result = "Probably not a vampire"
