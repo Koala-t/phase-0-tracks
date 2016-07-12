@@ -28,7 +28,16 @@ age = ask_age()
 dob = ask_dob()
 garlic = food_preference()
 covered = insurance()
+check_dob = 2016 - age.to_i
+
+
+
+if check_dob.to_s == dob && (garlic == "yes" || covered == "yes")
+	result = "Probably not a vampire"
+end
 
 if name == "Drake Cula" || name == "Tu Fang" || name == "Allucard"
-	puts "Definitley a vampire"
+	result = "Definitley a vampire"
 end
+
+puts result;
