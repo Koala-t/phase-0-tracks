@@ -29,8 +29,6 @@ dob = ask_dob()
 garlic = food_preference()
 covered = insurance()
 
-puts name
-puts age
-puts dob 
-puts garlic
-puts covered
+if name == "Drake Cula" || name == "Tu Fang" || name == "Allucard"
+	puts "Definitley a vampire"
+end
