@@ -3,5 +3,13 @@ def ask_name()
 	return gets.chomp
 end
 
-name = ask_name()
-puts name
+def ask_age()
+	puts "What is your age?"
+	return gets.chomp
+end
+
+def ask_dob()
+	puts "When were you born?"
+	return gets.chomp
+end
+
