@@ -22,3 +22,15 @@ def insurance()
 	puts "Would you like to enroll in the company’s health insurance?"
 	return gets.chomp
 end
+
+name = ask_name()
+age = ask_age()
+dob = ask_dob()
+garlic = food_preference()
+covered = insurance()
+
+puts name
+puts age
+puts dob 
+puts garlic
+puts covered
