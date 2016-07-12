@@ -31,3 +31,27 @@ When the floor display indicates the target floor
 	Wait for the doors to open
 Exit the elevator
 Do a little dance
+
+
+REAL LIFE ALGORITHM:
+greet the hostess
+Determine the number of people you arrived with
+Tell the hostess “table for #{number_of_people}”
+follow the hostess to a table
+Pull one of the seats out
+Sit down in the seat
+Pick up the menu
+Read the menu
+When you find something that you want to eat
+	memorize the name of that meal
+	put down the menu
+Until a waiter/waitress arrives
+	make small talk
+	eat bread
+Ask the waiter for the meal you want
+Resume small talk and eating bread
+when the waiter brings the meal
+	Eat it
+Go to the bathroom
+Climb out the window
+Run
