@@ -36,6 +36,10 @@ if check_dob.to_s == dob && (garlic == "yes" || covered == "yes")
 	result = "Probably not a vampire"
 end
 
+if check_dob.to_s != dob && (garlic == "no" || covered == "no")
+	result = "Probably a vampire"
+end
+
 if name == "Drake Cula" || name == "Tu Fang" || name == "Allucard"
 	result = "Definitley a vampire"
 end
