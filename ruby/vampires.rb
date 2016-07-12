@@ -23,29 +23,45 @@ def insurance()
 	return gets.chomp
 end
 
-name = ask_name()
-age = ask_age()
-dob = ask_dob()
-garlic = food_preference()
-covered = insurance()
-check_dob = 2016 - age.to_i
 
-result = "Results inconclusive"
 
-if check_dob.to_s == dob && (garlic == "yes" || covered == "yes")
-	result = "Probably not a vampire"
+def process_employees()
+	puts "How many employees are you screening?"
+	num_employees = gets.chomp.to_i
+
+	while num_employees > 0
+
+		name = ask_name()
+		age = ask_age()
+		dob = ask_dob()
+		garlic = food_preference()
+		covered = insurance()
+		check_dob = 2016 - age.to_i
+
+		result = "Results inconclusive"
+
+		if check_dob.to_s == dob && (garlic == "yes" || covered == "yes")
+			result = "Probably not a vampire"
+		end
+
+		if check_dob.to_s != dob && (garlic == "no" || covered == "no")
+			result = "Probably a vampire"
+		end
+
+		if check_dob.to_s != dob && garlic == "no" && covered == "no"
+			result = "almost certainly a vampire"
+		end
+
+		if name == "Drake Cula" || name == "Tu Fang" || name == "Allucard"
+			result = "Definitley a vampire"
+		end
+
+		puts result;
+
+		num_employees -= 1
+
+	end
+
 end
 
-if check_dob.to_s != dob && (garlic == "no" || covered == "no")
-	result = "Probably a vampire"
-end
-
-if check_dob.to_s != dob && garlic == "no" && covered == "no"
-	result = "almost certainly a vampire"
-end
-
-if name == "Drake Cula" || name == "Tu Fang" || name == "Allucard"
-	result = "Definitley a vampire"
-end
-
-puts result;
+process_employees()
