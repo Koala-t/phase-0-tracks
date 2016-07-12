@@ -1,0 +1,33 @@
+I am going to assume that the robot starts at the elevator it will use.
+
+locate the floor you are currently on
+if the current floor is greater than the target floor
+	press the down elevator-call button
+if the current floor is less than the target floor
+	press the up elevator-call button
+If you are in a hurry
+	continue pressing the button
+	chant “come on”
+Otherwise step away from the elevator doors and wait until they open
+if anyone is leaving the elevator
+	Wait for them to exit
+walk into the elevator
+start turning clockwise
+When you see a panel of buttons, stop turning
+	If you turn 360 degrees and don’t see a panel of buttons
+		You are in a broom cupboard
+		leave the cupboard and find the elevator
+		Start over from step one
+move your finger to the top-left button
+
+if the button does not have the same number as the target floor move your finger to the right
+Otherwise press the button
+If your finger is not in front of a button
+	move your finger down one row and place it in front of the left most button on that row
+repeat this step until a button is pressed
+
+Step away from the elevator door and watch the floor display. (Whatever this elevator has that tells what floor it’s on)
+When the floor display indicates the target floor
+	Wait for the doors to open
+Exit the elevator
+Do a little dance
