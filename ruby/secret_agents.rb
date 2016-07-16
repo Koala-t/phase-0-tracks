@@ -1,4 +1,20 @@
-# determine string length
-# iterate through the string
-	# change each letter to the next letter in the alphabet
-	# overwrite the old string with the new string
+
+def encode
+	puts "What secret would you like to keep?"
+	secret = gets.chomp
+	index = 0
+
+	# determine string length
+	length = secret.length
+	# iterate through the string
+	while index < length
+		# change each letter to the next letter in the alphabet
+		secret[index] = secret[index].next
+		# overwrite the old string with the new string
+		index += 1
+	end
+
+	puts secret
+end
+
+encode()
