@@ -18,3 +18,14 @@ def encode
 end
 
 encode()
+
+
+
+# declare method
+	# make alphabet string
+	
+	# get next letter in input
+		# find it in the alphabet
+		# change it to the preceeding letter
+
+# end method
