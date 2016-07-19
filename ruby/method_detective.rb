@@ -24,13 +24,14 @@
 # => "the usual suspects"
 # " suspects".prepend("the usual")
 
-# "The case of the disappearing last letter".<???>
+# "The case of the disappearing last letter".chop
 # => "The case of the disappearing last lette"
+# "The case of the disappearing last letter".slice(0..-2)
 
-# "The mystery of the missing first letter".<???>
+# "The mystery of the missing first letter".slice(1..-1)
 # => "he mystery of the missing first letter"
 
-# "Elementary,    my   dear        Watson!".<???>
+# "Elementary,    my   dear        Watson!".tr_s(" ", " ")
 # => "Elementary, my dear Watson!"
 
 # "z".<???>
