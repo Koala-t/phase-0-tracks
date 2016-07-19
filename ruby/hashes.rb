@@ -43,7 +43,13 @@ def Client_info
 			field = gets.chomp
 			# update it 
 			puts "what should it be?"
-			info[field.to_sym] = gets.chomp
+			if field == "name" || field == "color"
+				info[field.to_sym] = gets.chomp
+			elsif field == "age" || field == "children"
+				info[field.to_sym] = gets.chomp.to_i
+			else
+				info[field.to_sym] = truth(gets.chomp)
+			end
 		# if yes...	
 		else
 			# move on
