@@ -32,14 +32,20 @@ def Client_info
 		info[:lead] = truth(gets.chomp)
 
 	# print the hash to the screen
+	info.each {|key, value| puts key.to_s + ": " + value.to_s}
 
 	# ask the user if all the info is correct
+	puts "Does this look right?(y/n)"
 		# if no...
+		if gets.chomp == "n"
 			# ask which field is incorrect
+			
 			# update it 
-		# if yes...
+		# if yes...	
+		else
 			# move on
-
+			puts "Great!"
+		end
 	# print the hash again
 	puts info
 end 
