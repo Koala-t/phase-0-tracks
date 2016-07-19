@@ -56,7 +56,7 @@ def Client_info
 			puts "Great!"
 		end
 	# print the hash again
-	info.each {|key, value| puts key.to_s + ": " + value.to_s}
+	puts info
 end 
 
 Client_info()
