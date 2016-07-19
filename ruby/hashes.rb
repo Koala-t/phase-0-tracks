@@ -39,8 +39,11 @@ def Client_info
 		# if no...
 		if gets.chomp == "n"
 			# ask which field is incorrect
-			
+			puts "Where is the problem?"
+			field = gets.chomp
 			# update it 
+			puts "what should it be?"
+			info[field.to_sym] = gets.chomp
 		# if yes...	
 		else
 			# move on
