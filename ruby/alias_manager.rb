@@ -48,7 +48,38 @@ def alias_maker(name)
 	return change_vowels(new_name)
 end
 
-puts change_vowels('apple')
+# puts change_vowels('apple')
 
-puts alias_maker("Freddy Mercury")
-puts alias_maker("Eddy Aikau")
+# puts alias_maker("Freddy Mercury")
+# puts alias_maker("Eddy Aikau")
+
+
+
+
+# driver code
+
+# make a data structure to store agent-names
+agents = {}
+
+# repeat next steps until agents has 'exit' as a key
+until agents.has_key?('exit')
+
+	# prompt the user to input names
+	puts "Greetings agent, enter your name to recieve a totally-cool codename."
+	puts "Type exit to stop entering names"
+	name = gets.chomp
+
+	# add the name and it's code-name to the data structure
+	agents[name] = alias_maker(name)
+	puts agents[name]
+
+end
+
+puts agents
+
+
+
+
+
+
+
