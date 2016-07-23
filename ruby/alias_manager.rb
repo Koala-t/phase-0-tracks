@@ -33,9 +33,12 @@ def alias_maker(name)
 	last_name = name.split(' ')[1]
 	first_name = name.split(' ')[0]
 	# swap their order
-	
+	new_name = [last_name, first_name].join(' ')
 	# change vowels to the next vowel in 'aeiou'
+	return change_vowels(new_name)
 	# put them back together
 end
 
-puts change_vowels('appleu')
+puts change_vowels('apple')
+
+puts alias_maker("freddy mercury")
