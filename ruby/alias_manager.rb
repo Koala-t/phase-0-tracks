@@ -71,11 +71,18 @@ until agents.has_key?('exit')
 
 	# add the name and it's code-name to the data structure
 	agents[name] = alias_maker(name)
-	puts agents[name]
+
+	if name != 'exit'
+		puts agents[name]
+	end
 
 end
 
-puts agents
+# remove exit from the data structure
+agents.delete('exit')
+
+# print the stored data
+agents.each  {|name, codename| puts "#{name} the #{codename} is a smooth operator."}
 
 
 
