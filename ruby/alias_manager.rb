@@ -24,7 +24,6 @@ def change_vowels(word)
 				if letter == vowel
 					# change the letter to the next vowel
 					new_word << vowels[vowels.index(vowel) + 1]
-					# if the vowel is 'u' change it to 'a'
 				end
 			end
 		# if the letter isn't a vowel, add it to the new word
@@ -48,10 +47,7 @@ def alias_maker(name)
 	return change_vowels(new_name)
 end
 
-# puts change_vowels('apple')
 
-# puts alias_maker("Freddy Mercury")
-# puts alias_maker("Eddy Aikau")
 
 
 
