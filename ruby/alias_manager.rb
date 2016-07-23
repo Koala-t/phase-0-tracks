@@ -1,23 +1,33 @@
 # helper function to change vowels
 def change_vowels(word)
-	vowels = 'aeiou'.split('')
+	vowels = 'aeiouAEIOU'.split('')
 	letters = word.split('')
 	new_word = ''
 	# look each letter in turn
 	letters.each do |letter|
-		# if the letter is a vowel
-		if vowels.include? letter
+
+		# edge-cases
+		# if the letter is a 'u'
+		if letter == 'u'
+			# change it to an 'a'
+			new_word << 'a'
+		# if the letter is a 'U'
+		elsif letter == 'U'
+			# change it to an 'A'
+			new_word << 'A'
+
+		# if the letter is a vowel other than u or a
+		elsif vowels.include? letter
 			# look at each vowel in turn
 			vowels.each do |vowel|
 				# if the letter is any of the vowels
-				if letter == vowel && vowel != 'u'
+				if letter == vowel
 					# change the letter to the next vowel
 					new_word << vowels[vowels.index(vowel) + 1]
 					# if the vowel is 'u' change it to 'a'
-				elsif letter == vowel && letter == 'u'
-					new_word << 'a'
 				end
 			end
+		# if the letter isn't a vowel, add it to the new word
 		else
 			new_word << letter
 		end		
@@ -36,9 +46,9 @@ def alias_maker(name)
 	new_name = [last_name, first_name].join(' ')
 	# change vowels to the next vowel in 'aeiou'
 	return change_vowels(new_name)
-	# put them back together
 end
 
 puts change_vowels('apple')
 
-puts alias_maker("freddy mercury")
+puts alias_maker("Freddy Mercury")
+puts alias_maker("Eddy Aikau")
