@@ -2,6 +2,8 @@
 # Give it an initialize method and 2 other methods
 
 class Santa
+	attr_reader :age, :ethnicity, :reindeer_ranking
+	attr_accessor :gender
 
 	def initialize(gender, ethnicity)
 		puts "Initializing Santa instance ..."
@@ -28,27 +30,7 @@ class Santa
 		reindeer_ranking << reindeer
 	end
 
-	# setter method
-	def gender=(new_gender)
-		@gender = new_gender
-	end
-
-	# getter methods
-	def age
-		@age
-	end
-
-	def ethnicity
-		@ethnicity
-	end
-
-	def reindeer_ranking
-		@reindeer_ranking
-	end
-
-	def gender
-		@gender
-	end
+	
 
 	# bonus method
 	def introduction
@@ -70,7 +52,6 @@ p test.reindeer_ranking
 p test.gender
 test.gender = "female"
 p test.gender
-p test.age
 p test.ethnicity
 
 
