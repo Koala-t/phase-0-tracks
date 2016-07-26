@@ -42,7 +42,7 @@ hangman.target(gets.chomp)
 until hangman.guessed_letters.length == hangman.number_of_guesses || !hangman.guessed_word.include?('_')
 	puts "Make a guess"
 	guess = gets.chomp
-	# check it the guess was valid
+ 	# check if the guess was valid
 	if guess.is_a?(String) && guess.length == 1
 		# inform them if they make the same guess twice
 		if hangman.guessed_letters.include? guess
