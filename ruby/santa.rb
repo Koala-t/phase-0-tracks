@@ -2,8 +2,8 @@
 # Give it an initialize method and 2 other methods
 
 class Santa
-	attr_reader :age, :ethnicity, :reindeer_ranking
-	attr_accessor :gender
+	attr_reader :ethnicity, :reindeer_ranking
+	attr_accessor :gender, :age
 
 	def initialize(gender, ethnicity)
 		puts "Initializing Santa instance ..."
@@ -68,7 +68,16 @@ end
 
 
 
+# making LOTS of santas
+example_genders = ["agender", "female", "bigender", "male", "female", "gender fluid", "N/A"]
+example_ethnicities = ["black", "Latino", "white", "Japanese-African", "prefer not to say", "Mystical Creature (unicorn)", "N/A"]
 
-
-
+100.times do
+	another_santa = Santa.new(example_genders.sample, example_ethnicities.sample)
+	another_santa.age = rand(140)
+	p another_santa.age
+	p another_santa.gender
+	p another_santa.ethnicity
+	p another_santa.reindeer_ranking
+end
 
