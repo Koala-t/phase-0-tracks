@@ -6,7 +6,6 @@ module Flight
 end
 
 
-
 # make classes
 class Bird
 	include Flight
