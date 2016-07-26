@@ -42,37 +42,43 @@ hangman.target(gets.chomp)
 until hangman.guessed_letters.length == hangman.number_of_guesses || !hangman.guessed_word.include?('_')
 	puts "Make a guess"
 	guess = gets.chomp
-	# inform them if they make the same guess twice
-	if hangman.guessed_letters.include? guess
-		puts "You have already guessed that letter, try again."
-	# check if the new guess is in the target-word
-	elsif hangman.guess(guess)
-		# find the locations where the guessed letter appears in the target_word
-		indexes = []
-		i = 0
-		hangman.target_word.each_char do |letter|
-			if letter == guess
-				indexes << i
+	# check it the guess was valid
+	if guess.is_a?(String) && guess.length == 1
+		# inform them if they make the same guess twice
+		if hangman.guessed_letters.include? guess
+			puts "You have already guessed that letter, try again."
+		# check if the new guess is in the target-word
+		elsif hangman.guess(guess)
+			# find the locations where the guessed letter appears in the target_word
+			indexes = []
+			i = 0
+			hangman.target_word.each_char do |letter|
+				if letter == guess
+					indexes << i
+				end
+				i += 1
 			end
-			i += 1
+			# add the guessed letter to the guessed_word
+			indexes.each do |position|
+				hangman.guessed_word[position] = guess
+			end
+			# add the guess to guessed_letters
+			hangman.guessed_letters << guess
+			# inform the user they were correct and the status of the guessed_word
+			puts "Well done! You have made a correct guess!"
+			puts hangman.guessed_word.join(' ')
+		# if they were wrong and havent used that guess before
+		else
+			# add the guess to the guessed_letters
+			hangman.guessed_letters << guess
+			# inform them that they didn't get the guess right
+			puts "Too bad, that letter isn't in the word."
+			# print out their progress
+			puts hangman.guessed_word.join(' ')
 		end
-		# add the guessed letter to the guessed_word
-		indexes.each do |position|
-			hangman.guessed_word[position] = guess
-		end
-		# add the guess to guessed_letters
-		hangman.guessed_letters << guess
-		# inform the user they were correct and the status of the guessed_word
-		puts "Well done! You have made a correct guess!"
-		puts hangman.guessed_word.join(' ')
-	# if they were wrong and havent used that guess before
+	# if the guess was invalid
 	else
-		# add the guess to the guessed_letters
-		hangman.guessed_letters << guess
-		# inform them that they didn't get the guess right
-		puts "Too bad, that letter isn't in the word."
-		# print out their progress
-		puts hangman.guessed_word.join(' ')
+		puts "Please only guess one letter at a time."
 	end
 end
 
