@@ -38,9 +38,18 @@ def add_item(item, quantity, list)
 end
 
 
+# Method to remove an item from the list
+# input: item to be removed, and the list
+def remove_item(item, list)
+	# steps: delete the item if it exists
+	list.delete_if {|key| key == item.to_sym}
+	# output: updated list
+	list
+end
 
 new_list = make_list("grapes milk cheese")
 p add_item("apples", 4, new_list)
+p remove_item("milk", new_list)
 
 
 
