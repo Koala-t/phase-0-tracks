@@ -23,17 +23,24 @@ end
 # input: item name and optional quantity
 def add_item(item, quantity, list)
 	# steps: 
+	# if the item is already in the list
+	if list[item] != nil
+		# add to the quantity
+		list[item.to_sym] = list[:item] + quantity
+	# otherwise
+	else
 		# make a new key with the input quantity
-	list[:item] = list[:item] + quantity
+		list[item.to_sym] = quantity
+	end
 	# output:
 		# updated list
-	p list
+	list
 end
 
 
 
-make_list("grapes milk cheese")
-# add_item("apples", 4, new_list)
+new_list = make_list("grapes milk cheese")
+p add_item("apples", 4, new_list)
 
 
 
