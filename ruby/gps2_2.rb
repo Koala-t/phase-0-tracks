@@ -61,10 +61,27 @@ def update(item, quantity, list)
 end
 
 
+# Method to print a list and make it look pretty
+# input: list
+def print(list)
+# steps: 
+	# make a new string
+	string = "This is the shopping list: \n"
+	# iterate through the list
+	list.each do |item, quantity|
+		# add the items and quantities to the string and end with a newline
+		string = string + "#{item}: #{quantity} \n"
+	end
+# output: the string
+	string
+end
+
+
 new_list = make_list("grapes milk cheese")
 p add_item("apples", 4, new_list)
 p remove_item("milk", new_list)
 p update("grapes", 900, new_list)
+puts print(new_list)
 
 
 
