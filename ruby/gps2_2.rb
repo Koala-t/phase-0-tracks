@@ -47,10 +47,24 @@ def remove_item(item, list)
 	list
 end
 
+
+# Method to update the quantity of an item
+# input: item, new quantity and the list
+def update(item, quantity, list)
+	# steps: if the item is in the list
+	if list.include? item.to_sym
+		# update the quantity
+		list[item.to_sym] = quantity
+	end
+	# output: return the updated list
+	list
+end
+
+
 new_list = make_list("grapes milk cheese")
 p add_item("apples", 4, new_list)
 p remove_item("milk", new_list)
-
+p update("grapes", 900, new_list)
 
 
 
