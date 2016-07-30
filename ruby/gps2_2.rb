@@ -13,7 +13,7 @@ def make_list(items)
   		list[item.to_sym] = 0
   	end
   # print the list to the console [can you use one of your other methods here?]
-  p list
+  print(list)
   # output: [what data type goes here, array or hash?]
   list
 end
@@ -24,9 +24,10 @@ end
 def add_item(item, quantity, list)
 	# steps: 
 	# if the item is already in the list
-	if list[item] != nil
+	if list[item.to_sym] 
 		# add to the quantity
-		list[item.to_sym] = list[:item] + quantity
+		#list[item.to_sym] = list[item.to_sym] + quantity
+		list[item.to_sym] += quantity
 	# otherwise
 	else
 		# make a new key with the input quantity
@@ -42,7 +43,7 @@ end
 # input: item to be removed, and the list
 def remove_item(item, list)
 	# steps: delete the item if it exists
-	list.delete_if {|key| key == item.to_sym}
+	list.delete_if {|list_item| list_item == item.to_sym}
 	# output: updated list
 	list
 end
@@ -55,6 +56,8 @@ def update(item, quantity, list)
 	if list.include? item.to_sym
 		# update the quantity
 		list[item.to_sym] = quantity
+	else 
+		add_item(item, quantity, list)
 	end
 	# output: return the updated list
 	list
@@ -73,7 +76,7 @@ def print(list)
 		string = string + "#{item}: #{quantity} \n"
 	end
 # output: the string
-	string
+	puts string
 end
 
 
@@ -81,7 +84,7 @@ new_list = make_list("grapes milk cheese")
 p add_item("apples", 4, new_list)
 p remove_item("milk", new_list)
 p update("grapes", 900, new_list)
-puts print(new_list)
+print(new_list)
 
 
 
