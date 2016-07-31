@@ -87,7 +87,26 @@ p update("grapes", 900, new_list)
 print(new_list)
 
 
+# REFLECTIONS:
 
+# 1) I learned new formats for breaking down my pseudocode. 
+# I used to have pseudo code that was very similar to actual code but breaking it into input, steps and output helped to clarify the objectives.
+
+# 2) Hashes allow us to store the variety and quantity together while arrays would have a harder time associating 'apples' with the number of apples.
+# I don't see any downside to using the hashes. They might take up more room and be slower than arrays but not enough to make a difference with a program like this.
+
+# 3) A method returns the result of the last line of code in it's body. 
+
+# 4) you can pass any data type into a method as an argument:
+# booleans, strings, floats, integers, arrays, hashes, nil...
+# It really depends on what the method is trying to do with it's argmuents.
+
+# 5) You can pass information from one method to another by changing some piece of data in the global-scope.
+# you can also pass the return-value from one method into another as an argument.
+# the most efficient way I know about now is using a class to make data avaliable across multiple methods.
+
+# 6) My understanding of implicit return and argument declaration improved over this challenge. 
+# I also got more comfortable with the layout of hashes and converting strings to symbols and back.
 
 
 
