@@ -88,3 +88,18 @@ end
 
 #=======================================================================
 # Reflection Section
+
+=begin
+# one hash syntax uses strings as keys and fat-arrows to associate them to their values.
+The other syntax used symbols associated to integers by colons
+
+# require_relative lets us reference data from another file
+It is more convenient than "require" because we don't need to write out a whole file-path
+
+# You can iterate through a hash with a loop (while, until, do) or you can use the methods each or map
+
+# Several of the parameters were used in both of the methods.
+
+# I solidified my understanding of scope, types of variables, private and require_relative
+
+=end
