@@ -66,7 +66,6 @@ class VirusPredictor
     puts " and will spread across the state in #{speed} months.\n\n"
 
   end
-
 end
 
 #=======================================================================
@@ -74,7 +73,7 @@ end
 # DRIVER CODE
  # initialize VirusPredictor for each state
 
-
+=begin
 alabama = VirusPredictor.new("Alabama", STATE_DATA["Alabama"][:population_density], STATE_DATA["Alabama"][:population])
 alabama.virus_effects
 
@@ -86,6 +85,11 @@ california.virus_effects
 
 alaska = VirusPredictor.new("Alaska", STATE_DATA["Alaska"][:population_density], STATE_DATA["Alaska"][:population])
 alaska.virus_effects
+=end
+
+STATE_DATA.each do |state, data|
+  VirusPredictor.new(state, data[:population_density], data[:population]).virus_effects
+end
 
 
 #=======================================================================
