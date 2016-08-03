@@ -93,3 +93,16 @@ console.log(matchingElements(testObject1, testObject3))
 // wordGenerator test
 console.log('=====wordGenerator-test=====');
 console.log(wordGenerator(3));
+
+console.log('=====Release2-step2=====');
+// do this 10 times
+for(var i = 0; i < 10; i++) {
+	// make an array of (5) words
+	var array = wordGenerator(5);
+	// print the array
+	console.log(array);
+	// feed array into findLongestWord
+	longest = findLongestWord(array);
+	// print the result
+	console.log(longest);
+};
