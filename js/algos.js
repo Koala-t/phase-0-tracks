@@ -17,7 +17,23 @@ function findLongestWord(words) {
 };
 
 
+// method to look for matching key-value pairs in different objects
+
+// declare a method that takes two objects as arguments
+	// iterate through one of the objects (obj1)
+		// iterate through the other object (obj2)
+			// if the current key-value pair in obj1 matches the current key-value pair in obj2
+				// return true
+			// otherwise 
+				// return false
+
+
+				
+
+
+
 // driver code
+// findLongestWord tests
 // declare an array and assign it to a variable
 var testArray1 = ["word", "longerWord", "longestWord"]
 var testArray2 = ["Avacado", "lime", "orange"]
