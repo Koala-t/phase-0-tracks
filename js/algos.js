@@ -37,6 +37,21 @@ function matchingElements(obj1, obj2) {
 };
 
 
+// method for generating random words in an array with the length of the array determined by the input
+
+// declare a method that takes a number as an argument
+	// make an alphabet-variable
+	// make an array-variable
+	// iterate the input number of times
+		// make a word-variable
+		// determine the word-length randomly (1-10 letters)
+		// iterate word-length number of times
+			// chose a letter at random from the alphabet
+			// add that letter to the word-variable
+		// add the word-variable to the array-variable
+	// return the array-variable
+
+
 
 
 
