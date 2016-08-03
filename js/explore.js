@@ -12,4 +12,11 @@ function reverse(string) {
 }
 
 // driver code
-console.log(reverse('hello'));
+var backwards = reverse('hello');
+
+if(typeof backwards == 'string') {
+	console.log(backwards)
+} else {
+	console.log("oops, didn't work")
+}
+
