@@ -40,17 +40,30 @@ function matchingElements(obj1, obj2) {
 // method for generating random words in an array with the length of the array determined by the input
 
 // declare a method that takes a number as an argument
+function wordGenerator(numberOfElements) {
 	// make an alphabet-variable
+	var alphabet = 'abcdefghijklmnopqrstuvwxyz';	
 	// make an array-variable
+	var array = [];
 	// iterate the input number of times
+	for(var i = 0; i < numberOfElements; i++) {
 		// make a word-variable
+		var	word = '';
 		// determine the word-length randomly (1-10 letters)
+		var wordLength = Math.floor((Math.random() * 10) + 1);
 		// iterate word-length number of times
+		for(var j = 0; j < wordLength; j++) {
 			// chose a letter at random from the alphabet
+			var letter = alphabet[Math.floor(Math.random() * 26)];
 			// add that letter to the word-variable
+			word = word + letter;
+		};
 		// add the word-variable to the array-variable
+		array[i] = word;
+	};
 	// return the array-variable
-
+	return array;
+};
 
 
 
@@ -77,3 +90,6 @@ var testObject3 = {cat: 'orange', dog: 'brown', snake: 'green'};
 console.log(matchingElements(testObject1, testObject2))
 console.log(matchingElements(testObject1, testObject3))
 
+// wordGenerator test
+console.log('=====wordGenerator-test=====');
+console.log(wordGenerator(3));
