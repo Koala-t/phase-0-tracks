@@ -19,6 +19,11 @@ function findLongestWord(words) {
 
 // driver code
 // declare an array and assign it to a variable
-var testArray = ["word", "longestWord", "longWord"]
+var testArray1 = ["word", "longerWord", "longestWord"]
+var testArray2 = ["Avacado", "lime", "orange"]
+var testArray3 = ["dog", "cat", "rhino"]
+var testArrays = [testArray1, testArray2, testArray3]
 // invoke the longest-word-method and log the result
-console.log(findLongestWord(testArray))	
+for(var i = 0; i < testArrays.length; i++) {
+	console.log(findLongestWord(testArrays[i]))
+}	
