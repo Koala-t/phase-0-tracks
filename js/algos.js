@@ -20,26 +20,45 @@ function findLongestWord(words) {
 // method to look for matching key-value pairs in different objects
 
 // declare a method that takes two objects as arguments
+function matchingElements(obj1, obj2) {
 	// iterate through one of the objects (obj1)
+	for(key in obj1) {
 		// iterate through the other object (obj2)
+		for(match in obj2) {
 			// if the current key-value pair in obj1 matches the current key-value pair in obj2
+			if (key == match && obj1[key] == obj2[match]) {
 				// return true
-			// otherwise 
-				// return false
+				return true;
+			};	
+		};
+	};
+	// if none of the keys and values matched return false
+	return false;
+};
 
 
-				
 
 
 
 // driver code
+
 // findLongestWord tests
+console.log('=====findLongestWord-test=====');
 // declare an array and assign it to a variable
-var testArray1 = ["word", "longerWord", "longestWord"]
-var testArray2 = ["Avacado", "lime", "orange"]
-var testArray3 = ["dog", "cat", "rhino"]
-var testArrays = [testArray1, testArray2, testArray3]
+var testArray1 = ["word", "longerWord", "longestWord"];
+var testArray2 = ["Avacado", "lime", "orange"];
+var testArray3 = ["dog", "cat", "rhino"];
+var testArrays = [testArray1, testArray2, testArray3];
 // invoke the longest-word-method and log the result
 for(var i = 0; i < testArrays.length; i++) {
-	console.log(findLongestWord(testArrays[i]))
-}	
+	console.log(findLongestWord(testArrays[i]));
+};
+
+// matchingElements test
+console.log('=====matchingElements-test=====');
+var testObject1 = {hat: 'red', shirt: 'blue', pants: 'brown'};
+var testObject2 = {hat: 'green', shirt: 'orange', pants: 'brown'};
+var testObject3 = {cat: 'orange', dog: 'brown', snake: 'green'};
+console.log(matchingElements(testObject1, testObject2))
+console.log(matchingElements(testObject1, testObject3))
+
