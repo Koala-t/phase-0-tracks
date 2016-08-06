@@ -22,3 +22,29 @@ for(var i = 0; i < horses.length; i++) {
 	stable[horses[i]] = colors[i];
 };
 
+// create a Car constructor function
+	// give the car a couple of unique properties
+	// give the car some functions: honk, brake, accelerate
+
+function Car(doors, convertibleTop, color) {
+	
+	this.doors = doors;
+	this.convertibleTop = convertibleTop;
+	this.color = color; 
+	this.position = 'here'; 
+
+	this.honk = function() {console.log ("Beep, beep!")}; 
+	this.brake = function() {console.log ("Screeech!")};
+	this.accelerate = function() { this.position = 'over there'};
+	this.findCar = function() {console.log ("Your car is "+ this.position + ".")}
+
+
+}; 
+
+var corvette = new Car(4, true, "red");
+console.log(corvette);
+corvette.honk();
+corvette.brake();
+corvette.findCar();
+corvette.accelerate();
+corvette.findCar();
