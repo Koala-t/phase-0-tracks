@@ -19,3 +19,20 @@ SQL
 
 db.execute(add_week)
 
+
+days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+# make a function to fill the week with days
+def add_days(days, db)
+	days.each do |d|
+		db.execute("INSERT INTO week (day) VALUES (?)", [d])
+	end
+end
+
+# add days to the week table if they're not already there 
+if db.execute("SELECT id FROM week") == []
+	add_days(days, db)
+end
+
+
+
+
