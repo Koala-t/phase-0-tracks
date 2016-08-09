@@ -1,0 +1,70 @@
+RELEASE 2 QUESTION 2
+Joining 2 tables to return business names and the number of stars
+
+SELECT businesses.name, reviews.stars
+   ...> FROM businesses
+   ...> INNER JOIN reviews
+   ...> ON reviews.business_id = businesses.id;
+lotus yoga|4
+Amirs Towing|4
+Sushi World|1
+
+Joining 3 tables and returning all data
+
+SELECT * FROM businesses INNER JOIN reviews ON reviews.business_id = businesses.id INNER JOIN users ON reviews.user_id = users.id;
+1|lotus yoga|1|4|it smelled nice|1|2|2|Mandy|Kaling
+2|Amirs Towing|2|4|fast service|2|1|1|Bradford|Pitt
+3|Sushi World|3|1|i got sick|3|1|1|Bradford|Pitt
+
+Joining 3 tables to return business names, their stars, and the reviewer
+
+SELECT businesses.name, reviews.stars, users.firstname, users.lastname
+   ...> FROM businesses
+   ...> INNER JOIN reviews
+   ...> ON reviews.business_id = businesses.id
+   ...> INNER JOIN users
+   ...> ON reviews.user_id = users.id;
+lotus yoga|4|Mandy|Kaling
+Amirs Towing|4|Bradford|Pitt
+Sushi World|1|Bradford|Pitt
+
+same as before but only including good businesses
+
+SELECT businesses.name, reviews.stars, users.firstname, users.lastname
+   ...> FROM businesses
+   ...> INNER JOIN reviews
+   ...> ON reviews.business_id = businesses.id
+   ...> INNER JOIN users
+   ...> ON reviews.user_id = users.id
+   ...> WHERE reviews.stars>3;
+lotus yoga|4|Mandy|Kaling
+Amirs Towing|4|Bradford|Pitt
+
+————————————————————————————————————————————————————————————————————————
+Question 3
+
+SELECT businesses.name, reviews.stars, users.firstname, users.lastname, reviews.comment
+    FROM businesses
+    INNER JOIN reviews
+    ON reviews.business_id = businesses.id
+    INNER JOIN users 
+    ON reviews.user_id = users.id;
+lotus yoga|4|Mandy|Kaling|it smelled nice
+Amirs Towing|4|Bradford|Pitt|fast service
+Sushi World|1|Bradford|Pitt|i got sick
+
+————————————————————————————————————————————————————————————————————————
+Question 4
+
+SELECT businesses.name, reviews.stars, users.firstname, users.lastname, reviews.comment
+   ...>     FROM businesses
+   ...>     INNER JOIN reviews
+   ...>     ON reviews.business_id = businesses.id
+   ...>     INNER JOIN users 
+   ...>     ON reviews.user_id = users.id
+   ...> WHERE businesses.name = 'lotus yoga';
+lotus yoga|4|Mandy|Kaling|it smelled nice
+
+
+
+
