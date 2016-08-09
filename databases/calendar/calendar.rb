@@ -7,3 +7,15 @@ require 'sqlite3'
 
 # create database
 db = SQLite3::Database.new("calendar.db")
+
+# make some tables (stick to weekly calendar for now)
+add_week = <<-SQL 
+	CREATE TABLE IF NOT EXISTS week(
+		id INTEGER PRIMARY KEY,
+		day VARCHAR(255),
+		events ARRAY
+	)
+SQL
+
+db.execute(add_week)
+
