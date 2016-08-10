@@ -61,8 +61,11 @@ end
 # make something to clear the week and day
 puts "Would you like to clear the calendar? (y/n)"
 if gets.chomp == 'y'
-	db.execute("DROP TABLE week")
-	db.execute("DROP TABLE events")
+	puts "Are you sure you would like to clear the calendar? (y/n)"
+	if gets.chomp == 'y'
+		db.execute("DROP TABLE week")
+		db.execute("DROP TABLE events")
+	end
 end
 
 # allow the user to access all the events 
