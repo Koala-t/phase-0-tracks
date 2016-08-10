@@ -13,10 +13,21 @@ add_week = <<-SQL
 	CREATE TABLE IF NOT EXISTS week(
 		id INTEGER PRIMARY KEY,
 		day VARCHAR(255),
-		events ARRAY
+		day_id INT,
+		FOREIGN KEY (day_id) REFERENCES day(id)
 	)
 SQL
 
+add_day = <<-DAY_TABLE 
+	CREATE TABLE IF NOT EXISTS day(
+		id INTEGER PRIMARY KEY,
+		event VARCHAR(255),
+		time TIME,
+		urgent BOOLEAN
+	)
+DAY_TABLE
+
+db.execute(add_day)
 db.execute(add_week)
 
 
@@ -34,22 +45,22 @@ if db.execute("SELECT id FROM week") == []
 end
 
 # prompt the user to add an event
-puts "Would you like to add an event to the calendar? (y/n)"
-if gets.chomp == 'n'
-	puts "have a nice day"
-else
-	puts "What day will the event take place?"
-	date = gets.chomp
-	puts "Please enter a short description of the event."
-	appointment = gets.chomp
-	# this adds another day (a new row)
-	# I could not add days at the start but just add days and events as I go
-		# this would be bad in terms of saving space
-		# try to add events to the events array on each existing day row
-	db.execute("INSERT INTO week (day, events) VALUES (?, ?)", [date, appointment])
-end
+#puts "Would you like to add an event to the calendar? (y/n)"
+#if gets.chomp == 'n'
+#	puts "have a nice day"
+#else
+#	puts "What day will the event take place?"
+#	date = gets.chomp
+#	puts "Please enter a short description of the event."
+#	appointment = gets.chomp
+#	# this adds another day (a new row)
+#	# I could not add days at the start but just add days and events as I go
+#		# this would be bad in terms of saving space
+#		# try to add events to the events array on each existing day row
+#	db.execute("INSERT INTO week (day, events) VALUES (?, ?)", [date, appointment])
+#end
 
-p db.execute("SELECT events from week WHERE day='Monday'")
+#p db.execute("SELECT events from week WHERE day='Monday'")
 
 
 
