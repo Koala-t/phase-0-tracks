@@ -214,3 +214,28 @@ end
 # remind the user of important events
 reminder(db)
 
+
+# I want to make my 196-212 until-loop more DRY
+# I tried to use a hash to store my method-calls 
+# like this
+=begin
+
+use_commands = {
+	list: access_events(db),
+	day: daily_events(db, days),
+	add: new_event(db, days),
+	remove: delete_event(db, days),
+	change: change_time(db, days),
+	clear: clear_calendar(days, db, add_events, add_week)
+}
+
+The problem with this setup is the methods in the hash were invoked 
+I wanted to store them then call them simply like so
+
+until action == 'done' do
+	puts "What would you like to do?"
+	use_commands[gets.chomp]
+end
+
+Is there a way to make this work?
+=end
