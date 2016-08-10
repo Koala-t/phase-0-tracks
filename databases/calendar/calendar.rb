@@ -58,16 +58,6 @@ if gets.chomp == 'y'
 	db.execute("INSERT INTO events (event, time, urgent, week_id) VALUES (?, ?, ?, ?)", [appointment, hour, alert, date])
 end
 
-# make something to clear the week and day
-puts "Would you like to clear the calendar? (y/n)"
-if gets.chomp == 'y'
-	puts "Are you sure you would like to clear the calendar? (y/n)"
-	if gets.chomp == 'y'
-		db.execute("DROP TABLE week")
-		db.execute("DROP TABLE events")
-	end
-end
-
 # allow the user to access all the events 
 puts "Would you like to view your calendar? (y/n)"
 if gets.chomp == 'y'
@@ -97,4 +87,14 @@ important.each do |event|
 	puts event.join('-')
 end
 puts '----------------------'
+
+# make something to clear the week and day
+puts "Would you like to clear the calendar? (y/n)"
+if gets.chomp == 'y'
+	puts "Are you sure you would like to clear the calendar? (y/n)"
+	if gets.chomp == 'y'
+		db.execute("DROP TABLE week")
+		db.execute("DROP TABLE events")
+	end
+end
 
