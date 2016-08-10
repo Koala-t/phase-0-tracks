@@ -72,9 +72,22 @@ end
 def access_events(db)
 	puts "Would you like to view your calendar? (y/n)"
 	if gets.chomp == 'y'
-		plan = db.execute("SELECT week.day, events.time, events.event FROM week, events WHERE events.week_id = week.id")
-		plan.each do |event|
-			puts event.join('-')
+		plan = db.execute("SELECT week.day, events.time, events.event, week.id FROM week, events WHERE week.id = events.week_id")
+		# until all the events are listed
+		until plan == []
+			next_event = plan.first
+			# look for the next event
+			plan.each do |event|
+				if next_event.last > event.last
+					next_event = event
+				end
+			end
+			# remove next_event from plan
+			plan.delete_at(plan.index(next_event))
+			# remove the week.id from next_event
+			next_event.pop
+			# print the next_event
+			puts next_event.join('-')
 		end
 	end
 end
@@ -130,14 +143,17 @@ describe_commands = {
 	'clear'=>'remove all items from the calendar'
 }
 
+# tell the user what they can do
 puts "Welcome to your calendar."
 puts "use one of the following commands or type 'done' when finished:"
-#describe_commands.each_key do |command|
-#	puts "#{command}: #{describe_commands[command]}"
-#end
+describe_commands.each_key do |command|
+	puts "#{command}: #{describe_commands[command]}"
+end
 
+# make the tables (if they're not already there)
 generate_tables(days, db, add_events, add_week)
 
+# let the user select an action
 action = ''
 until action == 'done' do
 	puts "What would you like to do?"
@@ -154,6 +170,6 @@ until action == 'done' do
 	end
 end
 
-
+# remind the user of important events
 reminder(db)
 
