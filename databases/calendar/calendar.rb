@@ -138,6 +138,26 @@ def reminder(db)
 	puts '----------------------'
 end
 
+# make a method to update the time of an event
+def change_time(db, days)
+	puts "Would you like to change the time of an event? (y/n)"
+	if gets.chomp == 'y'
+		puts "What day is the event on?"
+		day = gets.chomp
+		# check for invalid input
+		if days.include?(day)
+			index = days.index(day) + 1
+			puts "What event would you like to change?"
+			event = gets.chomp
+			puts "When will it happen?"
+			time = gets.chomp
+			db.execute("UPDATE events SET time = ? WHERE event = ? AND week_id = ?", [time, event, index])
+		else
+			puts "I do not recognise that day"
+		end
+	end
+end
+
 # make something to clear the week and day
 def clear_calendar(days, db, add_events, add_week)
 	puts "Would you like to clear the calendar? (y/n)"
@@ -157,6 +177,7 @@ describe_commands = {
 	'day'=>'access all the events on a given day',
 	'add'=>'add a new event to your calendar',
 	'remove'=>'remove an item from the calendar',
+	'change'=>'change the time of an event',
 	'clear'=>'remove all items from the calendar'
 }
 
@@ -175,7 +196,6 @@ action = ''
 until action == 'done' do
 	puts "What would you like to do?"
 	action = gets.chomp
-	p action
 	if action == 'list'
 		access_events(db)
 	elsif action == 'day'
@@ -184,6 +204,8 @@ until action == 'done' do
 		new_event(db, days)
 	elsif action == 'remove'
 		delete_event(db, days)
+	elsif action == 'change'
+		change_time(db, days)
 	elsif action == 'clear'
 		clear_calendar(days, db, add_events, add_week)
 	end
