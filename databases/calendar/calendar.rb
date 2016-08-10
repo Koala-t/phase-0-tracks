@@ -72,7 +72,14 @@ if gets.chomp == 'y'
 	plan.each do |event|
 		puts event.join('-')
 	end
-
 end
 
-
+# remind the user of the important events
+puts '----------------------'
+puts "Dont forget to attend:"
+important = db.execute("SELECT week.day, events.time, events.event FROM week, events WHERE events.week_id = week.id AND events.urgent = 'true'")
+important.each do |event|
+	puts '----------------------'
+	puts event.join('-')
+end
+puts '----------------------'
