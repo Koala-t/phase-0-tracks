@@ -31,7 +31,9 @@ EVENTS_TABLE
 def generate_tables(days, db, add_events, add_week)
 	db.execute(add_events)
 	db.execute(add_week)
-	add_days(days, db)
+	if db.execute("SELECT id FROM week") == []
+		add_days(days, db)
+	end
 end
 
 # make a days array
@@ -97,23 +99,32 @@ def reminder(db)
 end
 
 # make something to clear the week and day
-def clear_calendar(db)
+def clear_calendar(days, db, add_events, add_week)
 	puts "Would you like to clear the calendar? (y/n)"
 	if gets.chomp == 'y'
 		puts "Are you sure you would like to clear the calendar? (y/n)"
 		if gets.chomp == 'y'
 			db.execute("DROP TABLE week")
 			db.execute("DROP TABLE events")
+			generate_tables(days, db, add_events, add_week)
 		end
 	end
 end
 
 # driver code
+commands = {
+	'list'=>'access a list of upcoming events',
+
+}
+
+puts "Welcome to your calendar."
+puts "use one of the following commands or type 'done' when finished:"
 generate_tables(days, db, add_events, add_week)
 access_events(db)
 new_event(db, days)
 access_events(db)
 delete_event(db, days)
-clear_calendar(db)
+# generate tables if you clear the calendar
+clear_calendar(days, db, add_events, add_week)
 reminder(db)
 
