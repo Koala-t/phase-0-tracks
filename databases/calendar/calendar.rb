@@ -92,6 +92,22 @@ def access_events(db)
 	end
 end
 
+# allow user to see events on a particular day
+def daily_events(db, days)
+	puts "which day's events would you like to see?"
+	day = gets.chomp
+	# check for invalid input
+	if days.include?(day)
+		index = days.index(day) + 1
+		plan = db.execute("SELECT events.time, events.event FROM events WHERE events.week_id = ?", [index])
+		plan.each do |event|
+			puts event.join('-')
+		end
+	else
+		puts "I do not recognise that day"
+	end
+end
+
 # allow the user to delete events
 def delete_event(db, days)
 	puts "Would you like to delete an event? (y/n)"
@@ -138,6 +154,7 @@ end
 # driver code
 describe_commands = {
 	'list'=>'access a list of upcoming events',
+	'day'=>'access all the events on a given day',
 	'add'=>'add a new event to your calendar',
 	'remove'=>'remove an item from the calendar',
 	'clear'=>'remove all items from the calendar'
@@ -161,6 +178,8 @@ until action == 'done' do
 	p action
 	if action == 'list'
 		access_events(db)
+	elsif action == 'day'
+		daily_events(db, days)
 	elsif action == 'add'
 		new_event(db, days)
 	elsif action == 'remove'
