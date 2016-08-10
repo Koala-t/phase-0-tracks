@@ -85,10 +85,15 @@ def delete_event(db, days)
 	if gets.chomp == 'y'
 		puts "What day is the event on?"
 		day = gets.chomp
-		index = days.index(day) + 1
-		puts "Which event would you like to delete from #{day}?"
-		deleted = gets.chomp
-		db.execute("DELETE FROM events WHERE events.event = ? AND events.week_id = ?", [deleted, index])
+		# check for invalid input
+		if days.include?(day)
+			index = days.index(day) + 1
+			puts "Which event would you like to delete from #{day}?"
+			deleted = gets.chomp
+			db.execute("DELETE FROM events WHERE events.event = ? AND events.week_id = ?", [deleted, index])
+		else
+			puts "I do not recognise that day"
+		end
 	end
 end
 
