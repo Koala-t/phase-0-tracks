@@ -74,6 +74,17 @@ if gets.chomp == 'y'
 	end
 end
 
+# allow the user to delete events
+puts "Would you like to delete an event? (y/n)"
+if gets.chomp == 'y'
+	puts "What day is the event on?"
+	day = gets.chomp
+	index = days.index(day) + 1
+	puts "Which event would you like to delete from #{day}?"
+	deleted = gets.chomp
+	db.execute("DELETE FROM events WHERE events.event = ? AND events.week_id = ?", [deleted, index])
+end
+
 # remind the user of the important events
 puts '----------------------'
 puts "Dont forget to attend:"
@@ -83,3 +94,4 @@ important.each do |event|
 	puts event.join('-')
 end
 puts '----------------------'
+
