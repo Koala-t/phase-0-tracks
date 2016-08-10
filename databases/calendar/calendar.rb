@@ -12,22 +12,22 @@ db = SQLite3::Database.new("calendar.db")
 add_week = <<-SQL 
 	CREATE TABLE IF NOT EXISTS week(
 		id INTEGER PRIMARY KEY,
-		day VARCHAR(255),
-		day_id INT,
-		FOREIGN KEY (day_id) REFERENCES day(id)
+		day VARCHAR(255)
 	)
 SQL
 
-add_day = <<-DAY_TABLE 
-	CREATE TABLE IF NOT EXISTS day(
+add_events = <<-EVENTS_TABLE 
+	CREATE TABLE IF NOT EXISTS events(
 		id INTEGER PRIMARY KEY,
 		event VARCHAR(255),
 		time TIME,
-		urgent BOOLEAN
+		urgent BOOLEAN,
+		week_id INT,
+		FOREIGN KEY (week_id) REFERENCES week(id)
 	)
-DAY_TABLE
+EVENTS_TABLE
 
-db.execute(add_day)
+db.execute(add_events)
 db.execute(add_week)
 
 
@@ -45,22 +45,26 @@ if db.execute("SELECT id FROM week") == []
 end
 
 # prompt the user to add an event
-#puts "Would you like to add an event to the calendar? (y/n)"
-#if gets.chomp == 'n'
-#	puts "have a nice day"
-#else
-#	puts "What day will the event take place?"
-#	date = gets.chomp
-#	puts "Please enter a short description of the event."
-#	appointment = gets.chomp
-#	# this adds another day (a new row)
-#	# I could not add days at the start but just add days and events as I go
-#		# this would be bad in terms of saving space
-#		# try to add events to the events array on each existing day row
-#	db.execute("INSERT INTO week (day, events) VALUES (?, ?)", [date, appointment])
-#end
+puts "Would you like to add an event to the calendar? (y/n)"
+if gets.chomp == 'n'
+	puts "have a nice day"
+else
+	puts "What day will the event take place?"
+	date = days.index(gets.chomp) + 1
+	puts "What time will it take place?"
+	hour = gets.chomp
+	puts "Please enter a short description of the event."
+	appointment = gets.chomp
+	puts "Is this an important event?"
+	alert = gets.chomp
+	db.execute("INSERT INTO events (event, time, urgent, week_id) VALUES (?, ?, ?, ?)", [appointment, hour, alert, date])
+end
 
-#p db.execute("SELECT events from week WHERE day='Monday'")
-
+# make something to clear the week and day
+puts "Would you like to clear the calendar? (y/n)"
+if gets.chomp == 'y'
+	db.execute("DROP TABLE week")
+	db.execute("DROP TABLE events")
+end
 
 
