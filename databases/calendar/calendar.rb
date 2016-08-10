@@ -112,19 +112,29 @@ def clear_calendar(days, db, add_events, add_week)
 end
 
 # driver code
-commands = {
+describe_commands = {
 	'list'=>'access a list of upcoming events',
+	'add'=>'add a new event to your calendar',
+	'remove'=>'remove an item from the calendar',
+	'clear'=>'remove all items from the calendar'
+}
 
+use_commands = {
+	'list'=> 'access_events(db)',
+	'add'=> 'new_event(db, days)',
+	'remove'=> 'delete_event(db, days)',
+	'clear'=> 'clear_calendar(days, db, add_events, add_week)'
 }
 
 puts "Welcome to your calendar."
 puts "use one of the following commands or type 'done' when finished:"
+describe_commands.each_key do |command|
+	puts "#{command}: #{describe_commands[command]}"
+end
+
 generate_tables(days, db, add_events, add_week)
-access_events(db)
-new_event(db, days)
-access_events(db)
-delete_event(db, days)
-# generate tables if you clear the calendar
-clear_calendar(days, db, add_events, add_week)
+
+
+
 reminder(db)
 
