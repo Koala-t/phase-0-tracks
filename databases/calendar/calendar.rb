@@ -119,21 +119,29 @@ describe_commands = {
 	'clear'=>'remove all items from the calendar'
 }
 
-use_commands = {
-	'list'=> 'access_events(db)',
-	'add'=> 'new_event(db, days)',
-	'remove'=> 'delete_event(db, days)',
-	'clear'=> 'clear_calendar(days, db, add_events, add_week)'
-}
-
 puts "Welcome to your calendar."
 puts "use one of the following commands or type 'done' when finished:"
-describe_commands.each_key do |command|
-	puts "#{command}: #{describe_commands[command]}"
-end
+#describe_commands.each_key do |command|
+#	puts "#{command}: #{describe_commands[command]}"
+#end
 
 generate_tables(days, db, add_events, add_week)
 
+action = ''
+until action == 'done' do
+	puts "What would you like to do?"
+	action = gets.chomp
+	p action
+	if action == 'list'
+		access_events(db)
+	elsif action == 'add'
+		new_event(db, days)
+	elsif action == 'remove'
+		delete_event(db, days)
+	elsif action == 'clear'
+		clear_calendar(days, db, add_events, add_week)
+	end
+end
 
 
 reminder(db)
