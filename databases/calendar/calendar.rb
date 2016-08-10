@@ -46,21 +46,15 @@ end
 
 # prompt the user to add an event
 puts "Would you like to add an event to the calendar? (y/n)"
-if gets.chomp == 'n'
-	puts "have a nice day"
-else
+if gets.chomp == 'y'
 	puts "What day will the event take place?"
 	date = days.index(gets.chomp) + 1
 	puts "What time will it take place?"
 	hour = gets.chomp
 	puts "Please enter a short description of the event."
 	appointment = gets.chomp
-	puts "Is this an important event? (y/n)"
-	if gets.chomp == 'y'
-		alert = true
-	else
-		alert = false
-	end
+	puts "Is this an important event?"
+	alert = gets.chomp
 	db.execute("INSERT INTO events (event, time, urgent, week_id) VALUES (?, ?, ?, ?)", [appointment, hour, alert, date])
 end
 
@@ -69,6 +63,16 @@ puts "Would you like to clear the calendar? (y/n)"
 if gets.chomp == 'y'
 	db.execute("DROP TABLE week")
 	db.execute("DROP TABLE events")
+end
+
+# allow the user to access all the events 
+puts "Would you like to view your calendar? (y/n)"
+if gets.chomp == 'y'
+	plan = db.execute("SELECT week.day, events.time, events.event FROM week, events WHERE events.week_id = week.id")
+	plan.each do |event|
+		puts event.join('-')
+	end
+
 end
 
 
