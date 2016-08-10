@@ -55,8 +55,12 @@ else
 	hour = gets.chomp
 	puts "Please enter a short description of the event."
 	appointment = gets.chomp
-	puts "Is this an important event?"
-	alert = gets.chomp
+	puts "Is this an important event? (y/n)"
+	if gets.chomp == 'y'
+		alert = true
+	else
+		alert = false
+	end
 	db.execute("INSERT INTO events (event, time, urgent, week_id) VALUES (?, ?, ?, ?)", [appointment, hour, alert, date])
 end
 
