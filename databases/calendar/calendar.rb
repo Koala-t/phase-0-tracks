@@ -51,14 +51,20 @@ def new_event(db, days)
 	puts "Would you like to add an event to the calendar? (y/n)"
 	if gets.chomp == 'y'
 		puts "What day will the event take place?"
-		date = days.index(gets.chomp) + 1
-		puts "What time will it take place?"
-		hour = gets.chomp
-		puts "Please enter a short description of the event."
-		appointment = gets.chomp
-		puts "Is this an important event?"
-		alert = gets.chomp
-		db.execute("INSERT INTO events (event, time, urgent, week_id) VALUES (?, ?, ?, ?)", [appointment, hour, alert, date])
+		day = gets.chomp
+		# check if the input was valid
+		if days.include?(day)
+			date = days.index(day) + 1
+			puts "What time will it take place?"
+			hour = gets.chomp
+			puts "Please enter a short description of the event."
+			appointment = gets.chomp
+			puts "Is this an important event?"
+			alert = gets.chomp
+			db.execute("INSERT INTO events (event, time, urgent, week_id) VALUES (?, ?, ?, ?)", [appointment, hour, alert, date])
+		else
+			puts "I do not recognise that day."
+		end
 	end
 end
 
