@@ -12,44 +12,230 @@ db = SQLite3::Database.new("calendar.db")
 add_week = <<-SQL 
 	CREATE TABLE IF NOT EXISTS week(
 		id INTEGER PRIMARY KEY,
-		day VARCHAR(255),
-		events ARRAY
+		day VARCHAR(255)
 	)
 SQL
 
-db.execute(add_week)
+add_events = <<-EVENTS_TABLE 
+	CREATE TABLE IF NOT EXISTS events(
+		id INTEGER PRIMARY KEY,
+		event VARCHAR(255),
+		time TIME,
+		urgent BOOLEAN,
+		week_id INT,
+		FOREIGN KEY (week_id) REFERENCES week(id)
+	)
+EVENTS_TABLE
 
+
+def generate_tables(days, db, add_events, add_week)
+	db.execute(add_events)
+	db.execute(add_week)
+	if db.execute("SELECT id FROM week") == []
+		add_days(days, db)
+	end
+end
+
+# make a days array
+days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 # make a function to fill the week with days
-days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 def add_days(days, db)
 	days.each do |d|
 		db.execute("INSERT INTO week (day) VALUES (?)", [d])
 	end
 end
 
-# add days to the week table if they're not already there 
-if db.execute("SELECT id FROM week") == []
-	add_days(days, db)
-end
-
 # prompt the user to add an event
-puts "Would you like to add an event to the calendar? (y/n)"
-if gets.chomp == 'n'
-	puts "have a nice day"
-else
-	puts "What day will the event take place?"
-	date = gets.chomp
-	puts "Please enter a short description of the event."
-	appointment = gets.chomp
-	# this adds another day (a new row)
-	# I could not add days at the start but just add days and events as I go
-		# this would be bad in terms of saving space
-		# try to add events to the events array on each existing day row
-	db.execute("INSERT INTO week (day, events) VALUES (?, ?)", [date, appointment])
+def new_event(db, days)
+	puts "Would you like to add an event to the calendar? (y/n)"
+	if gets.chomp == 'y'
+		puts "What day will the event take place?"
+		day = gets.chomp
+		# check if the input was valid
+		if days.include?(day)
+			date = days.index(day) + 1
+			puts "What time will it take place?"
+			hour = gets.chomp
+			puts "Please enter a short description of the event."
+			appointment = gets.chomp
+			puts "Is this an important event?"
+			alert = gets.chomp
+			db.execute("INSERT INTO events (event, time, urgent, week_id) VALUES (?, ?, ?, ?)", [appointment, hour, alert, date])
+		else
+			puts "I do not recognise that day."
+		end
+	end
 end
 
-p db.execute("SELECT events from week WHERE day='Monday'")
+# allow the user to access all the events 
+def access_events(db)
+	puts "Would you like to view your calendar? (y/n)"
+	if gets.chomp == 'y'
+		plan = db.execute("SELECT week.day, events.time, events.event, week.id FROM week, events WHERE week.id = events.week_id")
+		# until all the events are listed
+		until plan == []
+			next_event = plan.first
+			# look for the next event
+			plan.each do |event|
+				if next_event.last > event.last
+					next_event = event
+				end
+			end
+			# remove next_event from plan
+			plan.delete_at(plan.index(next_event))
+			# remove the week.id from next_event
+			next_event.pop
+			# print the next_event
+			puts next_event.join('-')
+		end
+	end
+end
+
+# allow user to see events on a particular day
+def daily_events(db, days)
+	puts "which day's events would you like to see?"
+	day = gets.chomp
+	# check for invalid input
+	if days.include?(day)
+		index = days.index(day) + 1
+		plan = db.execute("SELECT events.time, events.event FROM events WHERE events.week_id = ?", [index])
+		plan.each do |event|
+			puts event.join('-')
+		end
+	else
+		puts "I do not recognise that day"
+	end
+end
+
+# allow the user to delete events
+def delete_event(db, days)
+	puts "Would you like to delete an event? (y/n)"
+	if gets.chomp == 'y'
+		puts "What day is the event on?"
+		day = gets.chomp
+		# check for invalid input
+		if days.include?(day)
+			index = days.index(day) + 1
+			puts "Which event would you like to delete from #{day}?"
+			deleted = gets.chomp
+			db.execute("DELETE FROM events WHERE events.event = ? AND events.week_id = ?", [deleted, index])
+		else
+			puts "I do not recognise that day"
+		end
+	end
+end
+
+# remind the user of the important events
+def reminder(db)
+	puts '----------------------'
+	puts "Dont forget to attend:"
+	important = db.execute("SELECT week.day, events.time, events.event FROM week, events WHERE events.week_id = week.id AND events.urgent = 'true'")
+	important.each do |event|
+		puts '----------------------'
+		puts event.join('-')
+	end
+	puts '----------------------'
+end
+
+# make a method to update the time of an event
+def change_time(db, days)
+	puts "Would you like to change the time of an event? (y/n)"
+	if gets.chomp == 'y'
+		puts "What day is the event on?"
+		day = gets.chomp
+		# check for invalid input
+		if days.include?(day)
+			index = days.index(day) + 1
+			puts "What event would you like to change?"
+			event = gets.chomp
+			puts "When will it happen?"
+			time = gets.chomp
+			db.execute("UPDATE events SET time = ? WHERE event = ? AND week_id = ?", [time, event, index])
+		else
+			puts "I do not recognise that day"
+		end
+	end
+end
+
+# make something to clear the week and day
+def clear_calendar(days, db, add_events, add_week)
+	puts "Would you like to clear the calendar? (y/n)"
+	if gets.chomp == 'y'
+		puts "Are you sure you would like to clear the calendar? (y/n)"
+		if gets.chomp == 'y'
+			db.execute("DROP TABLE week")
+			db.execute("DROP TABLE events")
+			generate_tables(days, db, add_events, add_week)
+		end
+	end
+end
+
+# driver code
+describe_commands = {
+	'list'=>'access a list of upcoming events',
+	'day'=>'access all the events on a given day',
+	'add'=>'add a new event to your calendar',
+	'remove'=>'remove an item from the calendar',
+	'change'=>'change the time of an event',
+	'clear'=>'remove all items from the calendar'
+}
+
+# tell the user what they can do
+puts "Welcome to your calendar."
+puts "use one of the following commands or type 'done' when finished:"
+describe_commands.each_key do |command|
+	puts "#{command}: #{describe_commands[command]}"
+end
+
+# make the tables (if they're not already there)
+generate_tables(days, db, add_events, add_week)
+
+# let the user select an action
+action = ''
+until action == 'done' do
+	puts "What would you like to do?"
+	action = gets.chomp
+	if action == 'list'
+		access_events(db)
+	elsif action == 'day'
+		daily_events(db, days)
+	elsif action == 'add'
+		new_event(db, days)
+	elsif action == 'remove'
+		delete_event(db, days)
+	elsif action == 'change'
+		change_time(db, days)
+	elsif action == 'clear'
+		clear_calendar(days, db, add_events, add_week)
+	end
+end
+
+# remind the user of important events
+reminder(db)
 
 
+# I want to make my 196-212 until-loop more DRY
+# I tried to use a hash to store my method-calls 
+# like this
+=begin
 
+use_commands = {
+	list: access_events(db),
+	day: daily_events(db, days),
+	add: new_event(db, days),
+	remove: delete_event(db, days),
+	change: change_time(db, days),
+	clear: clear_calendar(days, db, add_events, add_week)
+}
+
+The problem with this setup is the methods in the hash were invoked 
+I wanted to store them then call them simply like so
+
+until action == 'done' do
+	puts "What would you like to do?"
+	use_commands[gets.chomp]
+end
+
+Is there a way to make this work?
+=end
