@@ -171,7 +171,7 @@ def clear_calendar(days, db, add_events, add_week)
 	end
 end
 
-# driver code
+# list the avaliable commands
 describe_commands = {
 	'list'=>'access a list of upcoming events',
 	'day'=>'access all the events on a given day',
@@ -181,12 +181,16 @@ describe_commands = {
 	'clear'=>'remove all items from the calendar'
 }
 
+def list_commands(describe_commands)
+	describe_commands.each_key do |command|
+		puts "#{command}: #{describe_commands[command]}"
+	end
+end
+# driver code
+
 # tell the user what they can do
 puts "Welcome to your calendar."
-puts "use one of the following commands or type 'done' when finished:"
-describe_commands.each_key do |command|
-	puts "#{command}: #{describe_commands[command]}"
-end
+puts "Enter 'help' for a list of available commands or 'done' when finished."
 
 # make the tables (if they're not already there)
 generate_tables(days, db, add_events, add_week)
@@ -197,6 +201,8 @@ until action == 'done' do
 	puts "What would you like to do?"
 	action = gets.chomp
 	case action
+	when 'help'
+		list_commands(describe_commands)
 	when 'list'
 		access_events(db)
 	when 'day'
