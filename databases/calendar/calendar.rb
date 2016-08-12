@@ -171,7 +171,7 @@ def clear_calendar(days, db, add_events, add_week)
 	end
 end
 
-# driver code
+# list the avaliable commands
 describe_commands = {
 	'list'=>'access a list of upcoming events',
 	'day'=>'access all the events on a given day',
@@ -181,12 +181,16 @@ describe_commands = {
 	'clear'=>'remove all items from the calendar'
 }
 
+def list_commands(describe_commands)
+	describe_commands.each_key do |command|
+		puts "#{command}: #{describe_commands[command]}"
+	end
+end
+# driver code
+
 # tell the user what they can do
 puts "Welcome to your calendar."
-puts "use one of the following commands or type 'done' when finished:"
-describe_commands.each_key do |command|
-	puts "#{command}: #{describe_commands[command]}"
-end
+puts "Enter 'help' for a list of available commands or 'done' when finished."
 
 # make the tables (if they're not already there)
 generate_tables(days, db, add_events, add_week)
@@ -196,46 +200,23 @@ action = ''
 until action == 'done' do
 	puts "What would you like to do?"
 	action = gets.chomp
-	if action == 'list'
+	case action
+	when 'help'
+		list_commands(describe_commands)
+	when 'list'
 		access_events(db)
-	elsif action == 'day'
+	when 'day'
 		daily_events(db, days)
-	elsif action == 'add'
+	when 'add'
 		new_event(db, days)
-	elsif action == 'remove'
+	when 'remove'
 		delete_event(db, days)
-	elsif action == 'change'
+	when 'change'
 		change_time(db, days)
-	elsif action == 'clear'
+	when 'clear'
 		clear_calendar(days, db, add_events, add_week)
 	end
 end
 
 # remind the user of important events
 reminder(db)
-
-
-# I want to make my 196-212 until-loop more DRY
-# I tried to use a hash to store my method-calls 
-# like this
-=begin
-
-use_commands = {
-	list: access_events(db),
-	day: daily_events(db, days),
-	add: new_event(db, days),
-	remove: delete_event(db, days),
-	change: change_time(db, days),
-	clear: clear_calendar(days, db, add_events, add_week)
-}
-
-The problem with this setup is the methods in the hash were invoked 
-I wanted to store them then call them simply like so
-
-until action == 'done' do
-	puts "What would you like to do?"
-	use_commands[gets.chomp]
-end
-
-Is there a way to make this work?
-=end
