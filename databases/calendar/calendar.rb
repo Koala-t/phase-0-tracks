@@ -196,17 +196,18 @@ action = ''
 until action == 'done' do
 	puts "What would you like to do?"
 	action = gets.chomp
-	if action == 'list'
+	case action
+	when 'list'
 		access_events(db)
-	elsif action == 'day'
+	when 'day'
 		daily_events(db, days)
-	elsif action == 'add'
+	when 'add'
 		new_event(db, days)
-	elsif action == 'remove'
+	when 'remove'
 		delete_event(db, days)
-	elsif action == 'change'
+	when 'change'
 		change_time(db, days)
-	elsif action == 'clear'
+	when 'clear'
 		clear_calendar(days, db, add_events, add_week)
 	end
 end
