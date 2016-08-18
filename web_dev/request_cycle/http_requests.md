@@ -17,13 +17,10 @@
 ## Question 2:
 ## What is the difference between a GET request and a POST request? When might each be used?
 
-``` 
-A GET request will **request** data from a specific resource while a POST request will **submit** data to a specific resource.
-GET requests can be cached or bookmarked, and remain in the browser history while POST requests do not. 
-You can use a GET request to get an image to display on the client screen.
-You can use a POST request to send login information to the server.
-
-```
+* A GET request will **request** data from a specific resource while a POST request will **submit** data to a specific resource.
+* GET requests can be cached or bookmarked, and remain in the browser history while POST requests do not. 
+* You can use a GET request to get an image to display on the client screen.
+* You can use a POST request to send login information to the server.
 
 ## Question 3:
 ## What is a cookie (the technical kind, not the delicious kind)? How does it relate to HTTP requests?
