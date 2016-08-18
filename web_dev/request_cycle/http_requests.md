@@ -24,3 +24,13 @@ You can use a GET request to get an image to display on the client screen.
 You can use a POST request to send login information to the server.
 
 ```
+
+## Question 3:
+## What is a cookie (the technical kind, not the delicious kind)? How does it relate to HTTP requests?
+
+* A cookie is a piece of information stored on the client's computer to preserve state. (i.e. Are they logged in? What is in their shopping cart?)
+* authentication cookies track if the user is logged in or otherwise have access to sensitive information.
+* tracking cookies keep track of the user's long-term browsing history. 
+* session cookies are deleted when the user leaves the webpage.
+* persistent cookies last a set amount of time, then are deleted.
+* zombie cookies are automatically recreated after it is deleted.
