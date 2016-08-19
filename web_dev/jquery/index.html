@@ -8,6 +8,7 @@
 		<script type="text/javascript" language = "javascript">
          $(document).ready(function() {
          	$( "p" ).hide();
+         	$( "#mydiv" ).css( "border", "3px solid black" );
          });
 		</script>
 	</head>
@@ -17,14 +18,28 @@
 			<p>now you don't</p>
 			<img src=http://scontent.cdninstagram.com/t51.2885-15/s480x480/e15/11111517_1634961946715163_527029777_n.jpg?ig_cache_key=OTY1NTYwMTM2MTc4OTc3NDU3.2></img>
 		</div>
+
 		<button>fade-toggle</button>
+
+        <div id="mydiv">
+        	<h3>Mouse over me!</h3>
+        </div>
+
 		<script type="text/javascript" language = "javascript">
 			$( "button" ).click(function() {
 			  $( "img" ).fadeToggle( "slow", "linear" );
 			  $( "h1" ).fadeToggle( "slow", "linear" );
 			  $( "p" ).fadeToggle( "slow", "linear" );
 			});
+
+			$( "#mydiv" ).hover(
+  				function() {
+    				$( "h3" ).hide(500);}, 
+    			function() {
+   	 				$( "h3" ).show(1000);
+  			});
         </script>
+
 	</body>	
 </html>
 
