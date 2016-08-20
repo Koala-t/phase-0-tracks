@@ -59,3 +59,9 @@ get '/great_job' do
     "Good job!"
   end
 end
+
+# a math route
+get '/add/:num1/:num2' do
+  sum = params[:num1].to_i + params[:num2].to_i
+  "The sum of #{params[:num1]} and #{params[:num2]} is #{sum.to_s}"
+end
