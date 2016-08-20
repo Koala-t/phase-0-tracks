@@ -49,3 +49,13 @@ end
 get '/contact' do
   '123 anytown USA'
 end
+
+# great_job route
+get '/great_job' do
+  name = params[:name]
+  if name
+    "Good job #{name}!"
+  else
+    "Good job!"
+  end
+end
