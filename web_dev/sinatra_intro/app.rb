@@ -44,3 +44,39 @@ get '/students/:id' do
   student = db.execute("SELECT * FROM students WHERE id=?", [params[:id]])[0]
   student.to_s
 end
+
+# contact route
+get '/contact' do
+  '123 anytown USA'
+end
+
+# great_job route
+get '/great_job' do
+  name = params[:name]
+  if name
+    "Good job #{name}!"
+  else
+    "Good job!"
+  end
+end
+
+# a math route
+get '/add/:num1/:num2' do
+  sum = params[:num1].to_i + params[:num2].to_i
+  "The sum of #{params[:num1]} and #{params[:num2]} is #{sum.to_s}"
+end
+
+# search route
+get '/search/:campus' do
+  campus = params[:campus]
+  students = db.execute("SELECT * FROM students")
+  response = ""
+  students.each do |student|
+    if student['campus'] == campus
+      response << "Name: #{student['name']}<br>"
+      response << "Age: #{student['age']}<br>"
+      response << "Campus: #{student['campus']}<br><br>"
+    end
+  end
+  response
+end
