@@ -40,5 +40,17 @@ for(var i = 0; i < set.length; i++) {
 
 
 // make changes on click
-var response = function () {console.log('clicked')};
+var response = function () {
+	var color = element.style.backgroundColor;
+	if (color == 'blue') {
+		element.style.backgroundColor = 'black';
+	} else {
+		element.style.backgroundColor = 'blue';
+	}
+};
 element.addEventListener("click", response);
+
+
+
+
+
