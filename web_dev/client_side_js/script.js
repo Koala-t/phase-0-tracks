@@ -15,3 +15,12 @@ element.style.width = '500px';
 element.style.height = '300px';
 element.style.border = '10px solid purple';
 element.style.backgroundColor = 'blue';
+
+
+// make 3 more divs
+for(var i = 0; i < 3; i++) {
+	var newDiv = document.createElement('div');
+	newDiv.id = 'set';
+	body.appendChild(newDiv);
+}
+
