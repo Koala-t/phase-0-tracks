@@ -22,7 +22,7 @@ for(var i = 0; i < 3; i++) {
 	var newDiv = document.createElement('div');
 	newDiv.className = 'set';
 	body.appendChild(newDiv);
-}
+};
 
 // change the style on all the 'set' divs
 set = document.getElementsByClassName('set');
@@ -32,8 +32,13 @@ var stylize = function(el) {
 	el.style.height = '100px';
 	el.style.border = '15px dotted red';
 	el.style.backgroundColor = 'orange';
-}
+};
 
 for(var i = 0; i < set.length; i++) {
 	stylize(set[i]);
-}
+};
+
+
+// make changes on click
+var response = function () {console.log('clicked')};
+element.addEventListener("click", response);
