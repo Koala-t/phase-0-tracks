@@ -20,7 +20,20 @@ element.style.backgroundColor = 'blue';
 // make 3 more divs
 for(var i = 0; i < 3; i++) {
 	var newDiv = document.createElement('div');
-	newDiv.id = 'set';
+	newDiv.className = 'set';
 	body.appendChild(newDiv);
 }
 
+// change the style on all the 'set' divs
+set = document.getElementsByClassName('set');
+
+var stylize = function(el) {
+	el.style.width = '200px';
+	el.style.height = '100px';
+	el.style.border = '15px dotted red';
+	el.style.backgroundColor = 'orange';
+}
+
+for(var i = 0; i < set.length; i++) {
+	stylize(set[i]);
+}
