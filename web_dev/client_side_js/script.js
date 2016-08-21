@@ -40,6 +40,7 @@ for(var i = 0; i < set.length; i++) {
 
 
 // make changes on click
+var number = 2;
 var response = function () {
 	var color = element.style.backgroundColor;
 	if (color == 'blue') {
@@ -47,10 +48,12 @@ var response = function () {
 	} else {
 		element.style.backgroundColor = 'blue';
 	}
+	if (number >= 0) {	
+		set[number].style.visibility = 'hidden';
+		number = number - 1;
+	}
 };
 element.addEventListener("click", response);
-
-
 
 
 
